@@ -31,7 +31,7 @@ echo "Backing up Evernote" >> $LOG
 GEEKNOTE_LOCKFILE="/var/run/geeknote-running"
 if [ ! -f $GEEKNOTE_LOCKFILE ]; then
   touch "$GEEKNOTE_LOCKFILE"
-  /usr/bin/gnsync --path "$OUT_DIR/evernote"
+  /usr/local/bin/gnsync --path "$OUT_DIR/evernote"
   rm "$GEEKNOTE_LOCKFILE"
 fi
 echo "Done backing up Evernote" >> $LOG
@@ -42,7 +42,7 @@ echo "Backing up Google Drive" >> $LOG
 RCLONE_LOCKFILE="/var/run/rclone-running"
 if [ ! -f $RCLONE_LOCKFILE ]; then
   touch "$RCLONE_LOCKFILE"
-  /usr/bin/rclone GoogleDrive:/ "$OUT_DIR/rclone"
+  /usr/bin/rclone sync GoogleDrive:/ "$OUT_DIR/rclone"
   rm "$RCLONE_LOCKFILE"
 fi
 echo "Done backing up Google Drive" >> $LOG

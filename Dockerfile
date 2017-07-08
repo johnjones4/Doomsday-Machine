@@ -11,6 +11,7 @@ RUN chmod 644 /etc/cron.d/backup
 ADD supervisor.conf /etc/supervisor/conf.d/backup.conf
 VOLUME /var/cloudbackups/workdir
 VOLUME /var/cloudbackups/archives
+RUN touch /var/log/backup.log
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   cron \
