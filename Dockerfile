@@ -46,17 +46,6 @@ RUN make install
 
 VOLUME /root/.lpass
 
-# Install Dropbox
-
-WORKDIR /tmp
-
-RUN curl -Lo dropbox-linux-x86_64.tar.gz https://www.dropbox.com/download?plat=lnx.x86_64
-RUN mkdir -p /opt/dropbox
-RUN tar xzfv dropbox-linux-x86_64.tar.gz --strip 1 -C /opt/dropbox
-RUN mkdir /var/cloudbackups/workdir/dropbox
-
-VOLUME /root/.dropbox
-
 # Install IMAP Backup
 
 WORKDIR /root
@@ -111,8 +100,6 @@ RUN unzip rclone-v1.36-linux-amd64.zip
 WORKDIR /usr/local/src/rclone-v1.36-linux-amd64
 RUN cp rclone /usr/bin/
 RUN chmod +x /usr/bin/rclone
-
-RUN mkdir /var/cloudbackups/workdir/rclone
 
 VOLUME /root/.config/rclone
 

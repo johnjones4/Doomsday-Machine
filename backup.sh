@@ -42,7 +42,13 @@ echo "Backing up Google Drive" >> $LOG
 RCLONE_LOCKFILE="/var/run/rclone-running"
 if [ ! -f $RCLONE_LOCKFILE ]; then
   touch "$RCLONE_LOCKFILE"
-  /usr/bin/rclone sync GoogleDrive:/ "$OUT_DIR/rclone" >> $LOG 2>> $LOG
+  mkdir "$OUT_DIR/rclone"
+  IFS=':' read -r -a RCLONE_REMOTES_ARRAY <<< "$RCLONE_REMOTES"
+  for RCLONE_REMOTE in "${RCLONE_REMOTES_ARRAY[@]}"
+  do
+    mkdir "$OUT_DIR/rclone/$RCLONE_REMOTE"
+    /usr/bin/rclone sync "$RCLONE_REMOTE":/ "$OUT_DIR/rclone/$RCLONE_REMOTE" >> $LOG 2>> $LOG
+  done
   rm "$RCLONE_LOCKFILE"
 fi
 echo "Done backing up Google Drive" >> $LOG
