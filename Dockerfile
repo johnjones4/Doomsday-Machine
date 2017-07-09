@@ -6,7 +6,7 @@ RUN mkdir /var/cloudbackups/workdir
 RUN mkdir /var/cloudbackups/archives
 ADD backup.sh /usr/bin/backup.sh
 ADD startup.sh /usr/bin/startup.sh
-ADD cronjobs /etc/cron.d/backup
+ADD crontab /etc/crontab
 RUN chmod 644 /etc/cron.d/backup
 ADD supervisor.conf /etc/supervisor/conf.d/backup.conf
 VOLUME /var/cloudbackups/workdir
@@ -18,7 +18,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   curl \
   supervisor \
   build-essential \
-  unzip
+  unzip \
+  vim
 
 # Install LastPass CLI
 
@@ -54,7 +55,6 @@ RUN curl -Lo dropbox-linux-x86_64.tar.gz https://www.dropbox.com/download?plat=l
 RUN mkdir -p /opt/dropbox
 RUN tar xzfv dropbox-linux-x86_64.tar.gz --strip 1 -C /opt/dropbox
 RUN mkdir /var/cloudbackups/workdir/dropbox
-RUN ln -s /var/cloudbackups/workdir/dropbox /root/Dropbox
 
 VOLUME /root/.dropbox
 
