@@ -61,6 +61,12 @@ GOOBOOK_FILE="$OUT_DIR/google_contacts.xml"
 gzip -f "$GOOBOOK_FILE"
 echo "Done backing up Google Contacts" >> $LOG
 
+# Todoist Backup
+
+echo "Backing up Todoist" >> $LOG
+/usr/local/bin/todoist-backup --config /etc/todoist/config.json
+echo "Done backing up Todoist" >> $LOG
+
 # Compress an Archive
 
 echo "Compressing backups" >> $LOG

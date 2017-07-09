@@ -114,7 +114,16 @@ RUN pip install goobook
 
 ADD goobookrc /root/.goobookrc
 
-VOLUME /root/goobook
+VOLUME /etc/goobook
+
+# Install Todoist Backup
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+
+RUN npm install -g todoist-backup
+
+VOLUME /etc/todoist
 
 # Closeout
 
