@@ -7,7 +7,6 @@ RUN mkdir /var/cloudbackups/archives
 ADD backup.sh /usr/bin/backup.sh
 ADD startup.sh /usr/bin/startup.sh
 ADD crontab /etc/crontab
-RUN chmod 644 /etc/cron.d/backup
 ADD supervisor.conf /etc/supervisor/conf.d/backup.conf
 VOLUME /var/cloudbackups/workdir
 VOLUME /var/cloudbackups/archives
