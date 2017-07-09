@@ -103,6 +103,19 @@ RUN chmod +x /usr/bin/rclone
 
 VOLUME /root/.config/rclone
 
+# Install GooBook
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  python \
+  python-dev \
+  python-pip
+
+RUN pip install goobook
+
+ADD goobookrc /root/.goobookrc
+
+VOLUME /root/goobook
+
 # Closeout
 
 WORKDIR /root

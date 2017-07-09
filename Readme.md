@@ -1,5 +1,4 @@
 # Todo
 
 * Todoist
-* Contacts
 * LastPass

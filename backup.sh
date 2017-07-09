@@ -38,7 +38,7 @@ echo "Done backing up Evernote" >> $LOG
 
 # RClone
 
-echo "Backing up Google Drive" >> $LOG
+echo "Backing up RClone Services" >> $LOG
 RCLONE_LOCKFILE="/var/run/rclone-running"
 if [ ! -f $RCLONE_LOCKFILE ]; then
   touch "$RCLONE_LOCKFILE"
@@ -51,7 +51,15 @@ if [ ! -f $RCLONE_LOCKFILE ]; then
   done
   rm "$RCLONE_LOCKFILE"
 fi
-echo "Done backing up Google Drive" >> $LOG
+echo "Done backing up RClone Services" >> $LOG
+
+# GooBook
+
+echo "Backing up Google Contacts" >> $LOG
+GOOBOOK_FILE="$OUT_DIR/google_contacts.xml"
+/usr/local/bin/goobook dump > "$GOOBOOK_FILE"
+gzip -f "$GOOBOOK_FILE"
+echo "Done backing up Google Contacts" >> $LOG
 
 # Compress an Archive
 
