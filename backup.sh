@@ -64,7 +64,7 @@ echo "Done backing up Google Contacts" >> $LOG
 # Todoist Backup
 
 echo "Backing up Todoist" >> $LOG
-/usr/bin/todoist-backup --config /etc/todoist/config.json
+/usr/bin/todoist-backup --config /etc/cloudbackup/todoist.json
 echo "Done backing up Todoist" >> $LOG
 
 # Compress an Archive

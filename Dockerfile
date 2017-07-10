@@ -10,6 +10,7 @@ ADD crontab /etc/crontab
 ADD supervisor.conf /etc/supervisor/conf.d/backup.conf
 VOLUME /var/cloudbackups/workdir
 VOLUME /var/cloudbackups/archives
+VOLUME /etc/cloudbackup
 RUN touch /var/log/backup.log
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -114,16 +115,12 @@ RUN pip install goobook
 
 ADD goobookrc /root/.goobookrc
 
-VOLUME /etc/goobook
-
 # Install Todoist Backup
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
 
 RUN npm install -g todoist-backup
-
-VOLUME /etc/todoist
 
 # Closeout
 

@@ -4,7 +4,7 @@
 
 # This file is written by the oauth library, and should be kept secure,
 # it's like a password to your google contacts.
-oauth_db_filename: /etc/goobook/goobook_auth.json
+oauth_db_filename: /etc/cloudbackup/goobook_auth.json
 
 # The client secret file is not really secret.
 ;client_secret_filename: ~/.goobook_client_secret.json
