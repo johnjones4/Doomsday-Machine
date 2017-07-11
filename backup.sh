@@ -57,7 +57,7 @@ echo "Done backing up RClone Services" >> $LOG
 
 echo "Backing up Google Contacts" >> $LOG
 GOOBOOK_FILE="$OUT_DIR/google_contacts.xml"
-/usr/local/bin/goobook dump > "$GOOBOOK_FILE"
+/usr/local/bin/goobook dump_contacts > "$GOOBOOK_FILE"
 gzip -f "$GOOBOOK_FILE"
 echo "Done backing up Google Contacts" >> $LOG
 
