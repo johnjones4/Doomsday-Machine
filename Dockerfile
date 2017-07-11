@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+WORKDIR /root
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -y
 RUN mkdir /var/cloudbackups
 RUN mkdir /var/cloudbackups/workdir
