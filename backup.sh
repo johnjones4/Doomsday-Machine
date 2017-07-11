@@ -31,7 +31,7 @@ echo "Backing up Evernote" >> $LOG
 GEEKNOTE_LOCKFILE="/var/run/geeknote-running"
 if [ ! -f $GEEKNOTE_LOCKFILE ]; then
   touch "$GEEKNOTE_LOCKFILE"
-  /usr/local/bin/gnsync --path "$OUT_DIR/evernote" >> $LOG 2>> $LOG
+  /usr/local/bin/gnsync --path "$OUT_DIR/evernote" --download-only --all >> $LOG 2>> $LOG
   rm "$GEEKNOTE_LOCKFILE"
 fi
 echo "Done backing up Evernote" >> $LOG
@@ -66,6 +66,12 @@ echo "Done backing up Google Contacts" >> $LOG
 echo "Backing up Todoist" >> $LOG
 /usr/bin/todoist-backup --config /etc/cloudbackup/todoist.json
 echo "Done backing up Todoist" >> $LOG
+
+# GitHub Backup
+
+echo "Backing up GitHub" >> $LOG
+/usr/bin/github-backup "$GITHUB_USER" "$OUT_DIR/github/"
+echo "Done backing up GitHub" >> $LOG
 
 # Compress an Archive
 
