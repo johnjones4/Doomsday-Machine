@@ -83,11 +83,14 @@ VOLUME /root/.imap-backup
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   python \
-  python-setuptools
+  python-setuptools \
+  python-dev \
+  python-pip
 WORKDIR /usr/local/src
-RUN git clone https://github.com/VitaliyRodnenko/geeknote.git
+RUN git clone https://github.com/jeffkowalski/geeknote.git
 WORKDIR /usr/local/src/geeknote
 RUN python setup.py install
+RUN pip install --upgrade .
 RUN mkdir /var/cloudbackups/workdir/evernote
 
 VOLUME /root/.geeknote
