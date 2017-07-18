@@ -8,11 +8,11 @@ touch "$LOG"
 
 # LastPass
 
-# echo "Backing up LastPass" >> $LOG
-# LASTPASS_FILE="$OUT_DIR/lastpasss.csv"
-# /usr/bin/lpass export > "$LASTPASS_FILE"
-# gzip "$LASTPASS_FILE"
-# echo "Done backing up LastPass" >> $LOG
+echo "Backing up LastPass" >> $LOG
+LASTPASS_FILE="$OUT_DIR/lastpasss.csv"
+/usr/bin/lpass export > "$LASTPASS_FILE"
+gzip "$LASTPASS_FILE"
+echo "Done backing up LastPass" >> $LOG
 
 # IMAP
 
