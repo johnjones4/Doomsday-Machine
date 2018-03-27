@@ -2,7 +2,7 @@
 
 OUT_DIR="/var/cloudbackups/workdir"
 ARCHIVE_DIR="/var/cloudbackups/archives"
-LOG="/var/log/backup.log"
+LOG="/backuplogs/log.txt"
 
 touch "$LOG"
 

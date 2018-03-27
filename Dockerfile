@@ -7,18 +7,15 @@ RUN mkdir /var/cloudbackups
 RUN mkdir /var/cloudbackups/workdir
 RUN mkdir /var/cloudbackups/archives
 ADD backup.sh /usr/bin/backup.sh
-ADD startup.sh /usr/bin/startup.sh
-ADD crontab /etc/crontab
-ADD supervisor.conf /etc/supervisor/conf.d/backup.conf
+ADD backup /etc/cron.d/backup
+RUN chmod 0644 /etc/cron.d/backup
 VOLUME /var/cloudbackups/workdir
 VOLUME /var/cloudbackups/archives
 VOLUME /etc/cloudbackup
-RUN touch /var/log/backup.log
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   cron \
   curl \
-  supervisor \
   build-essential \
   unzip \
   vim \
@@ -123,4 +120,8 @@ RUN mkdir /var/cloudbackups/workdir/github
 # Closeout
 
 WORKDIR /root
-CMD ["/usr/bin/startup.sh"]
+
+VOLUME /backuplogs
+
+CMD echo "Start" > /backuplogs/log.txt && cron && tail -f /backuplogs/log.txt
+
