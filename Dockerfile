@@ -96,9 +96,9 @@ VOLUME /root/.geeknote
 # Install RClone
 
 WORKDIR /usr/local/src
-RUN curl -O https://downloads.rclone.org/v1.36/rclone-v1.36-linux-amd64.zip
-RUN unzip rclone-v1.36-linux-amd64.zip
-WORKDIR /usr/local/src/rclone-v1.36-linux-amd64
+RUN curl -O https://downloads.rclone.org/v1.42/rclone-v1.42-linux-amd64.zip
+RUN unzip rclone-v1.42-linux-amd64.zip
+WORKDIR /usr/local/src/rclone-v1.42-linux-amd64
 RUN cp rclone /usr/bin/
 RUN chmod +x /usr/bin/rclone
 VOLUME /root/.config/rclone
