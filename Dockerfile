@@ -6,9 +6,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -y
 RUN mkdir /var/cloudbackups
 RUN mkdir /var/cloudbackups/workdir
 RUN mkdir /var/cloudbackups/archives
-ADD backup.sh /usr/bin/backup.sh
-ADD backup /etc/cron.d/backup
-RUN chmod 0644 /etc/cron.d/backup
 VOLUME /var/cloudbackups/workdir
 VOLUME /var/cloudbackups/archives
 VOLUME /etc/cloudbackup
@@ -119,9 +116,10 @@ RUN mkdir /var/cloudbackups/workdir/github
 
 # Closeout
 
-WORKDIR /root
+COPY scripts /scripts
 
-VOLUME /backuplogs
-
-CMD echo "Start" > /backuplogs/log.txt && cron && tail -f /backuplogs/log.txt
-
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY interface /usr/src/app
+RUN npm install
+CMD ["node", "index.js"]

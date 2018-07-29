@@ -1,0 +1,14 @@
+<%- include('header'); -%>
+<h2><%= job.label %></h2>
+<p>
+  <strong>Running:</strong>
+  <span><%= job.running %></span>
+</p>
+<p>
+  <strong>Runtime:</strong>
+  <span><%= job.started ? (new Date().getTime() - job.started) : 'N/A' %></span>
+</p>
+<pre>
+  <%= job.log %> 
+</pre>
+<%- include('footer'); -%>
