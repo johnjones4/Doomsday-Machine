@@ -1,3 +1,5 @@
 .DS_Store
-vols
-run.sh
+config.yml
+__pycache__
+*.json
+data/**

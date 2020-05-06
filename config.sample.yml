@@ -1,0 +1,60 @@
+jobs:
+  - type: dropbox
+    name: Dropbox
+    options:
+      oauth2_access_token: 
+      include: 
+        - /folder/pattern/*
+  - type: google_contacts
+    name: Google Contacts
+    options:
+      client_id: 
+      client_secret: 
+      token: 
+      refresh_token: 
+      code: 
+  - type: lastpass
+    name: Lastpass
+    options:
+        username: 
+        password: 
+  - type: github
+    name: GitHub
+    options:
+      access_token:  
+  - type: imap
+    name: Gmail
+    options:
+      host: imap.gmail.com
+      port: 993
+      tls: false
+      ssl: true
+      username: 
+      password: 
+      mailboxes:
+        - '"[Gmail]/All Mail"'
+        - Inbox
+
+email_notification:
+  from: 
+  to: 
+  host: smtp.gmail.com
+  port: 465
+  username: 
+  password: 
+  ssl: true
+  tls: false
+
+delay:
+  job: 0
+  cycle: 0
+
+outputs: 
+  - ./data/1
+  - ./data/2
+  - ./data/3
+active_job_file_path: ./data/active.json
+
+log:
+  level: DEBUG
+  file: ./data/log.log
