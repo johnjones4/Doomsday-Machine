@@ -56,5 +56,4 @@ def search_mail(logger, imap, mbox_folder, criteria):
         with open(msg_file_path, "wb") as msg_file:
             logger.debug(f"Saving {num.decode('utf-8')}")
             msg_file.write(mdata[0][1])
-            #TODO attachment
     return downloaded

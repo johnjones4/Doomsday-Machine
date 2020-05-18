@@ -32,28 +32,27 @@ To setup GitHub access, go to your [Personal access tokens](https://github.com/s
 
 #### IMAP
 
-TODO
+To add an email/IMAP account, specify all of the standard IMAP connection details as well as a list of mailboxes to download.
 
 ### Other Configuration Options
 
 #### Notifications
 
-TODO
+Upon completion of each backup job, Doomsday Machine can send an email notification. To allow that, specify IMAP connection details under `email_notification`.
 
 #### Delay
 
-TODO
+Between jobs and run loops, you can specify a delay time (In seconds) under `delay`.
 
 #### Outputs
 
-TODO
+Doomsday Machine will loop through a list of output directories under `outputs` in case you want to keep multiple redundant backups.
 
 #### Active Job
 
-TODO
+Doomsday Machine will write a JSON file with the active job information to the path specified in `active_job_file_path`.
 
 #### Logging
 
-TODO
-
+To control logging, set a logging level and/or output file under `logging`.
 
