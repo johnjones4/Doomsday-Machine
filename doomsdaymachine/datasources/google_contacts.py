@@ -1,8 +1,10 @@
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
+from google.auth.transport.urllib3 import Request
 import json
 import os.path as path
+import urllib3
 
 def execute_google_contacts(logger, config, job):
     credentials = Credentials( 
@@ -13,6 +15,7 @@ def execute_google_contacts(logger, config, job):
         client_secret=job["options"]["client_secret"],
         scopes=["https://www.googleapis.com/auth/contacts.readonly"],
     )
+    credentials.refresh(Request(urllib3.PoolManager()))
     service = build("people", "v1", credentials=credentials)
     results = service.people().connections().list(
         resourceName='people/me',

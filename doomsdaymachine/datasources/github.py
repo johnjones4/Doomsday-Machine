@@ -2,10 +2,11 @@ from github import Github
 import os.path as path
 import os
 import base64
+import urllib.request
 
 def execute_github(logger, config, job):
     gclient = Github(job["options"]["access_token"])
-    download_github_gists(logger, job, gclient)
+    # download_github_gists(logger, job, gclient)
     download_github_repositories(logger, job, gclient)
     
 
@@ -16,24 +17,15 @@ def download_github_repositories(logger, job, gclient):
         os.mkdir(projects_folder)
     for repo in gclient.get_user().get_repos():
         logger.info(f"Getting repo {repo.full_name}")
-        project_folder = path.join(projects_folder, repo.full_name)
-        contents = repo.get_contents("")
-        while contents:
-            file_content = contents.pop(0)
-            if file_content.type == "dir":
-                contents.extend(repo.get_contents(file_content.path))
-            else:
-                try:
-                    logger.debug(f"Downloading {file_content.path}")
-                    file_path = path.join(project_folder, file_content.path)
-                    folder = path.dirname(file_path)
-                    if not path.isdir(folder):
-                        os.makedirs(folder)
-                    with open(file_path, "wb") as file_handle:
-                        logger.debug(f"Saving {file_content.path}")
-                        file_handle.write(base64.b64decode(file_content.content))
-                except:
-                    logger.error(f"Exception during GitHub download {job['type']}/{job['name']}", exc_info=True)
+        project_file = path.join(projects_folder, repo.full_name)
+        os.makedirs(project_file)
+        for branch in repo.get_branches():
+            archive_url = repo.get_archive_link("tarball", branch.name)
+            archive_file = path.join(project_file, branch.name + ".tar.gz")
+            print(archive_url, archive_file)
+            with urllib.request.urlopen(archive_url) as dl_file:
+                with open(archive_file, "wb") as out_file:
+                    out_file.write(dl_file.read())
 
 def download_github_gists(logger, job, gclient):
     logger.info("Getting gists")
