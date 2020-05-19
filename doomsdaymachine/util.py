@@ -4,7 +4,7 @@ import os.path as path
 import string 
 
 def load_config():
-    with open("./config.yml", "r") as config_file:
+    with open("/var/lib/doomsday/config.yml", "r") as config_file:
         config = yaml.full_load(config_file)
         if "jobs" not in config:
             raise Exception(f"No config jobs provided")
