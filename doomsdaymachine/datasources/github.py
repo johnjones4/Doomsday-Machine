@@ -23,14 +23,17 @@ def download_github_repositories(logger, job, gclient):
             if file_content.type == "dir":
                 contents.extend(repo.get_contents(file_content.path))
             else:
-                logger.debug(f"Downloading {file_content.path}")
-                file_path = path.join(project_folder, file_content.path)
-                folder = path.dirname(file_path)
-                if not path.isdir(folder):
-                    os.makedirs(folder)
-                with open(file_path, "wb") as file_handle:
-                    logger.debug(f"Saving {file_content.path}")
-                    file_handle.write(base64.b64decode(file_content.content))
+                try:
+                    logger.debug(f"Downloading {file_content.path}")
+                    file_path = path.join(project_folder, file_content.path)
+                    folder = path.dirname(file_path)
+                    if not path.isdir(folder):
+                        os.makedirs(folder)
+                    with open(file_path, "wb") as file_handle:
+                        logger.debug(f"Saving {file_content.path}")
+                        file_handle.write(base64.b64decode(file_content.content))
+                except e:
+                    logger.error(f"Exception during GitHub download {job['type']}/{job['name']}", exc_info=True)
 
 def download_github_gists(logger, job, gclient):
     logger.info("Getting gists")
