@@ -25,13 +25,16 @@ def execute_dropbox(logger, config, job):
             if "include" not in job["options"] or is_valid_path(file.path_lower, job["options"]["include"]):
                 local_path = path.join(file_output_folder, file.path_lower[1:])
                 if isinstance(file, FileMetadata) and file.server_modified.timestamp() > syncer.get_last_modified(file.path_lower):
-                    logger.debug(f"Downloading: {file.path_lower}")
-                    folder = os.path.dirname(local_path)
-                    if not path.isdir(folder):
-                        os.makedirs(folder)
-                    client.files_download_to_file(local_path, file.path_lower)
-                    syncer.set_last_modified(file.path_lower, file.server_modified.timestamp())
-                    count += 1
+                    try:
+                        logger.debug(f"Downloading: {file.path_lower}")
+                        folder = os.path.dirname(local_path)
+                        if not path.isdir(folder):
+                            os.makedirs(folder)
+                        client.files_download_to_file(local_path, file.path_lower)
+                        syncer.set_last_modified(file.path_lower, file.server_modified.timestamp())
+                        count += 1
+                    except:
+                        logger.error(f"Exception during {job['type']}/{job['name']} to {job['output_folder']}", exc_info=True)
             else:
                 logger.debug(f"Not a match or up to date: {file.path_lower}")
         logger.info(f"Files downloaded: {count}")
