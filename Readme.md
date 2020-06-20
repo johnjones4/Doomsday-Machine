@@ -18,13 +18,24 @@ If you would like to run Doomsday Machine on a schedule, I recommend using somet
 
 ```
 [program:doomsday]
-command=/usr/bin/python3 /usr/local/src/Doomsday-Machine/start.py
+command=/usr/bin/python3 /usr/local/src/Doomsday-Machine/backup.py
 directory=/usr/local/src/Doomsday-Machine
 autostart=true
 autorestart=true
 startretries=3
-stderr_logfile=/var/log/doomsday/supervisor.err.log
-stdout_logfile=/var/log/doomsday/supervisor.out.log
+stderr_logfile=/var/log/doomsday/supervisor-backup.err.log
+stdout_logfile=/var/log/doomsday/supervisor-backup.out.log
+user=root
+environment=CONFIG_FILE='/var/lib/doomsday/config.yml'
+
+[program:doomsdaywebserver]
+command=/usr/bin/python3 /usr/local/src/Doomsday-Machine/webserver.py
+directory=/usr/local/src/Doomsday-Machine
+autostart=true
+autorestart=true
+startretries=3
+stderr_logfile=/var/log/doomsday/supervisor-webserver.err.log
+stdout_logfile=/var/log/doomsday/supervisor-webserver.out.log
 user=root
 environment=CONFIG_FILE='/var/lib/doomsday/config.yml'
 ```

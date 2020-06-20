@@ -1,0 +1,39 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background: black;
+  color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 4em;
+  text-transform: uppercase;
+}
+
+#chart svg {
+  margin: auto;
+  display: block;
+}
+
+@keyframes glow {
+  0%   {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+#chart svg .pie-segment.pie-segment-active {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+#chart svg .label-line {
+  fill: none;
+  stroke: white;
+}
+
+#chart svg .label {
+  fill: white;
+}
