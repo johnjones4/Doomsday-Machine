@@ -50,7 +50,7 @@
     }
     
     const pie = d3.pie()
-      .value(jobSeconds)
+      .value(d => Math.log(jobSeconds(d)))
     
     const dataReady = pie(jobs)
 
