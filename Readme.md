@@ -1,5 +1,7 @@
 # Doomsday Machine
 
+![Screenshot of Doomsday Machine](screenshot.png)
+
 ## About
 
 Doomsday Machine is a tool for backing up cloud services to a local machine.
