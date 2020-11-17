@@ -7,6 +7,7 @@ from doomsdaymachine.datasources.google_contacts import execute_google_contacts
 from doomsdaymachine.datasources.lastpass import execute_lastpass
 from doomsdaymachine.datasources.github import execute_github
 from doomsdaymachine.datasources.imap import execute_imap
+from doomsdaymachine.datasources.google_drive import execute_google_drive
 from doomsdaymachine.util import load_config
 from doomsdaymachine.notification import send_notification
 from doomsdaymachine.backup_log import BackupLog
@@ -54,3 +55,5 @@ def execute_job(logger, config, job):
         execute_github(logger, config, job)
     elif job["type"] == "imap":
         execute_imap(logger, config, job)
+    elif job["type"] == "google_drive":
+        execute_google_drive(logger, config, job)
