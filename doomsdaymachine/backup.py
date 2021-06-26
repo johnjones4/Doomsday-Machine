@@ -2,7 +2,6 @@ import time
 import os
 import os.path as path
 import logging
-from doomsdaymachine.datasources.dropbox import execute_dropbox
 from doomsdaymachine.datasources.google_contacts import execute_google_contacts
 from doomsdaymachine.datasources.lastpass import execute_lastpass
 from doomsdaymachine.datasources.github import execute_github
@@ -45,8 +44,6 @@ def execute_job(logger, config, job):
     logger.info(f"Starting {job['type']}/{job['name']} ({job['id']})")
     if not path.isdir(job["output_folder"]):
         os.mkdir(job["output_folder"])
-    if job["type"] == "dropbox":
-        execute_dropbox(logger, config, job)
     elif job["type"] == "google_contacts":
         execute_google_contacts(logger, config, job)
     elif job["type"] == "lastpass":

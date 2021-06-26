@@ -1,4 +1,3 @@
-dropbox
 PyGithub
 lastpass-python
 PyYAML
