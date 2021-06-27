@@ -29,7 +29,7 @@ def start():
                 (start_time, job_instance_id) = backup_log.start_job(job["id"])
                 execute_job(logger, config, job)
                 end_time = backup_log.end_job(job["id"], job_instance_id)
-                elapsed_time = time.time() - end_time
+                elapsed_time = end_time - start_time
                 send_notification(config, f"Completed {job['type']}/{job['name']} to {job['output_folder']} in {elapsed_time} seconds.")
             except Exception as e:
                 logger.error(f"Exception during {job['type']}/{job['name']} to {job['output_folder']}", exc_info=True)
